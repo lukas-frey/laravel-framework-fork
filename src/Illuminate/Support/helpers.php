@@ -3,6 +3,7 @@
 use Illuminate\Contracts\Support\DeferringDisplayableValue;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Env;
 use Illuminate\Support\Fluent;
@@ -282,6 +283,19 @@ if (! function_exists('optional')) {
         } elseif (! is_null($value)) {
             return $callback($value);
         }
+    }
+}
+
+if (! function_exists('pipe')) {
+    /**
+     * Create a Pipeline from the given object.
+     *
+     * @param  mixed  $value
+     * @return \Illuminate\Pipeline\Pipeline
+     */
+    function pipe($value)
+    {
+        return (new Pipeline)->send($value);
     }
 }
 
